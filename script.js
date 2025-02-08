@@ -20,9 +20,19 @@ const verses = [
     "اِذْنُكُمْ فِي قُدَمَيْهِ، يَحْتَسِي قُدَمَيَّ. - متى 11:28"
 ];
 
+let lastVerse = "";  // لتخزين الآية السابقة
+
 function getRandomVerse() {
-    const randomIndex = Math.floor(Math.random() * verses.length);
-    return verses[randomIndex];
+    let randomIndex;
+    let newVerse;
+
+    do {
+        randomIndex = Math.floor(Math.random() * verses.length);
+        newVerse = verses[randomIndex];
+    } while (newVerse === lastVerse);  // نتحقق من أن الآية الجديدة ليست نفس الآية السابقة
+
+    lastVerse = newVerse;  // تحديث الآية الأخيرة
+    return newVerse;
 }
 
 function updateVerse() {
