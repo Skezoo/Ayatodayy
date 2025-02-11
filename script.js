@@ -59,6 +59,7 @@ function showRemembrance() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    // التأكد من أن الزر متاح بعد تحميل الصفحة
     const remembranceButton = document.getElementById("remembrance-button");
     if (remembranceButton) {
         remembranceButton.addEventListener("click", showRemembrance);
