@@ -82,72 +82,22 @@ function enableNotifications() {
             localStorage.setItem("notificationsEnabled", "true");
             showToast("تم تفعيل التنبيهات اليومية! 🔔");
         } else {
-            showToast("لم يتم تفعيل التنبيهات!");
+            showToast("لم يتم تفعيل التنبيهات.");
         }
     });
 }
 
-function sendDailyNotification() {
-    if (localStorage.getItem("notificationsEnabled") === "true") {
-        const verseText = getRandomVerse();
-        new Notification("آية اليوم", { body: verseText });
-    }
-}
-
 function explainVerse() {
     const verseText = document.getElementById("verse").textContent;
-    showToast(تفسير الآية: ${verseText});
+    showToast(`تفسير الآية: ${verseText}`);
 }
 
-// قائمة بالتذكارات مرتبطة بتواريخ محددة
-const remembrances = [
-    { date: "01-01", text: "اليوم هو تذكار استشهاد القديس مارمينا العجايبي." },
-    { date: "01-02", text: "اليوم هو تذكار نياحة البابا كيرلس السادس." },
-    { date: "01-03", text: "اليوم هو تذكار استشهاد القديسة دميانة." },
-    { date: "01-04", text: "اليوم هو تذكار نياحة الأنبا أنطونيوس أب الرهبان." },
-    { date: "01-05", text: "اليوم هو تذكار استشهاد القديس جرجس الروماني." },
-    // يمكنك إضافة المزيد من التذكارات هنا
-];
+document.getElementById("new-verse").addEventListener("click", updateVerse);
+document.getElementById("copy-verse").addEventListener("click", copyVerse);
+document.getElementById("share-verse").addEventListener("click", shareVerse);
+document.getElementById("save-verse").addEventListener("click", saveVerse);
+document.getElementById("explain-verse").addEventListener("click", explainVerse);
+document.getElementById("notification-button").addEventListener("click", enableNotifications);
 
-// دالة للحصول على تذكار اليوم الفعلي
-function getTodaysRemembrance() {
-    const today = new Date();
-    const month = String(today.getMonth() + 1).padStart(2, "0"); // الشهر (01-12)
-    const day = String(today.getDate()).padStart(2, "0"); // اليوم (01-31)
-    const todayDate = ${month}-${day};
-
-    const remembrance = remembrances.find(r => r.date === todayDate);
-    return remembrance ? remembrance.text : "لا يوجد تذكار لهذا اليوم.";
-}
-
-// دالة لعرض تذكار اليوم
-function showRemembrance() {
-    const remembrance = getTodaysRemembrance();
-    showToast(remembrance); // عرض التذكار كإشعار
-}
-
-// دالة لعرض تذكار اليوم
-function showRemembrance() {
-    const remembrance = getTodaysRemembrance();
-    showToast(remembrance); // عرض التذكار كإشعار
-}
-
-// تهيئة الصفحة عند التحميل
-document.addEventListener("DOMContentLoaded", () => {
-    const verseElement = document.getElementById("verse");
-    if (verseElement) {
-        verseElement.textContent = "جاري تحميل الآية..."; // رسالة تحميل مؤقتة
-        updateVerse(); // تحديث الآية مباشرة
-    }
-
-    // ربط الأزرار بالدوال
-    document.getElementById("new-verse").addEventListener("click", updateVerse);
-    document.getElementById("copy-verse").addEventListener("click", copyVerse);
-    document.getElementById("share-verse").addEventListener("click", shareVerse);
-    document.getElementById("save-verse").addEventListener("click", saveVerse);
-    document.getElementById("explain-verse").addEventListener("click", explainVerse);
-    document.getElementById("notification-button").addEventListener("click", enableNotifications);
-    document.getElementById("remembrance-button").addEventListener("click", showRemembrance); // ربط الزر الجديد
-
-    setInterval(sendDailyNotification, 86400000); // إرسال إشعار يومي كل 24 ساعة
-});
+// تحميل الآية عند فتح الصفحة
+window.addEventListener("load", updateVerse);
