@@ -17,31 +17,39 @@ const remembrances = {
     "02-01": "نياحة البابا كيرلس السادس",
     "03-01": "استشهاد القديسة دميانة",
     "04-01": "نياحة الأنبا أنطونيوس أب الرهبان",
-    // إضافة التواريخ المتبقية
+    // إضافة التواريخ المتبقية هنا
+    "15-10": "تذكار اختباري" // مثال لتاريخ اليوم الحالي
 };
 
 let currentVerse = null;
 let notificationsEnabled = false;
 
-// === وظائف الأساسية ===
-function getFormattedDate() {
-    const date = new Date();
-    return `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-}
-
+// ======== إصلاح مشكلة تحميل الآية ========
 function getRandomVerse() {
+    if (verses.length === 0) {
+        console.error("لا توجد آيات متاحة");
+        return null;
+    }
+    
     let randomIndex;
     do {
         randomIndex = Math.floor(Math.random() * verses.length);
-    } while (verses[randomIndex] === currentVerse);
+    } while (verses.length > 1 && verses[randomIndex] === currentVerse);
     
-    currentVerse = verses[randomIndex];
-    return currentVerse;
+    return verses[randomIndex];
 }
 
 function updateVerseDisplay() {
     const verse = getRandomVerse();
     const verseElement = document.getElementById('verse');
+    
+    if (!verse || !verseElement) {
+        console.error("خطأ في تحميل الآية");
+        verseElement.textContent = "عذرًا، حدث خطأ في تحميل الآية";
+        return;
+    }
+    
+    currentVerse = verse;
     verseElement.innerHTML = `
         <p>${verse.text}</p>
         <p class="verse-reference">${verse.reference}</p>
@@ -50,94 +58,57 @@ function updateVerseDisplay() {
     setTimeout(() => verseElement.classList.remove('animate__fadeIn'), 500);
 }
 
-// === نظام التذكارات ===
+// ======== إصلاح مشكلة التذكارات ========
+function getFormattedDate() {
+    const date = new Date();
+    return `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+}
+
 function showTodaysRemembrance() {
     const today = getFormattedDate();
-    const remembrance = remembrances[today] || "لا يوجد تذكار خاص اليوم";
+    const remembrance = remembrances[today] || `لا يوجد تذكار مسجل لـ ${today}`;
+    
+    console.log("تاريخ اليوم:", today); // للمساعدة في التشخيص
     showToast(remembrance);
 }
 
-// === نظام المشاركة ===
-async function shareVerse() {
-    try {
-        await navigator.share({
-            title: `آية اليوم - ${currentVerse.reference}`,
-            text: `${currentVerse.text}\n\n${currentVerse.reference}`,
-            url: window.location.href
-        });
-    } catch (err) {
-        showToast("تم إلغاء المشاركة");
-    }
-}
-
-// === نظام الحفظ ===
-function saveVerse() {
-    const saved = JSON.parse(localStorage.getItem('savedVerses') || []);
-    const exists = saved.some(v => v.reference === currentVerse.reference);
-    
-    if (!exists) {
-        saved.push(currentVerse);
-        localStorage.setItem('savedVerses', JSON.stringify(saved));
-        showToast("تم حفظ الآية في المفضلة");
-    } else {
-        showToast("الآية محفوظة مسبقًا");
-    }
-}
-
-// === نظام التنبيهات ===
-function toggleNotifications() {
-    if (!notificationsEnabled) {
-        Notification.requestPermission().then(permission => {
-            if (permission === "granted") {
-                notificationsEnabled = true;
-                setupDailyNotification();
-                showToast("تم تفعيل التنبيهات اليومية");
-            }
-        });
-    } else {
-        notificationsEnabled = false;
-        showToast("تم إيقاف التنبيهات");
-    }
-}
-
-function setupDailyNotification() {
-    if (!notificationsEnabled) return;
-
-    const now = new Date();
-    const target = new Date(now);
-    target.setHours(9, 0, 0, 0); // الساعة 9 صباحًا
-    
-    if (now > target) {
-        target.setDate(target.getDate() + 1);
-    }
-
-    const timeout = target - now;
-    
-    setTimeout(() => {
-        new Notification("آية اليوم", {
-            body: `${currentVerse.text}\n${currentVerse.reference}`
-        });
-        setupDailyNotification();
-    }, timeout);
-}
-
-// === نظام التحميل الأولي ===
+// ======== نظام الأساسي ========
 document.addEventListener('DOMContentLoaded', () => {
+    // التحميل الأولي للآية
     updateVerseDisplay();
     
-    // تهيئة الأحداث
+    // تهيئة الأزرار
     document.getElementById('new-verse').addEventListener('click', updateVerseDisplay);
     document.getElementById('copy-verse').addEventListener('click', () => {
         navigator.clipboard.writeText(`${currentVerse.text} - ${currentVerse.reference}`);
         showToast("تم نسخ الآية");
     });
-    document.getElementById('share-verse').addEventListener('click', shareVerse);
-    document.getElementById('save-verse').addEventListener('click', saveVerse);
+    document.getElementById('share-verse').addEventListener('click', async () => {
+        try {
+            await navigator.share({
+                title: `آية اليوم - ${currentVerse.reference}`,
+                text: `${currentVerse.text}\n\n${currentVerse.reference}`,
+                url: window.location.href
+            });
+        } catch (err) {
+            showToast("تم إلغاء المشاركة");
+        }
+    });
+    document.getElementById('save-verse').addEventListener('click', () => {
+        const saved = JSON.parse(localStorage.getItem('savedVerses') || '[]');
+        const exists = saved.some(v => v.reference === currentVerse.reference);
+        
+        if (!exists) {
+            saved.push(currentVerse);
+            localStorage.setItem('savedVerses', JSON.stringify(saved));
+            showToast("تم حفظ الآية في المفضلة");
+        } else {
+            showToast("الآية محفوظة مسبقًا");
+        }
+    });
     document.getElementById('remembrance-button').addEventListener('click', showTodaysRemembrance);
-    document.getElementById('notification-button').addEventListener('click', toggleNotifications);
 });
 
-// === وظيفة العرض التلقائي ===
 function showToast(message, duration = 3000) {
     const toast = document.getElementById('toast');
     toast.textContent = message;
