@@ -1,4 +1,3 @@
-
 const verses = [
     "اَلْمَحَبَّةُ تَتَأَنَّى وَتَرْفُقُ. اَلْمَحَبَّةُ لَا تَحْسِدُ. اَلْمَحَبَّةُ لَا تَتَفَاخَرُ وَلَا تَنْتَفِخُ. - 1 كورنثوس 13:4",
     "وَأَمَّا ثَمَرُ ٱلرُّوحِ فَهُوَ: مَحَبَّةٌ، فَرَحٌ، سَلَامٌ، طُولُ أَنَاةٍ، لُطْفٌ، صَلَاحٌ، إِيمَانٌ. - غلاطية 5:22",
@@ -30,38 +29,11 @@ function showToast(message) {
     }, 3000);
 }
 
-function getTodaysRemembrance() {
-    const remembrances = [
-        { date: "02-11", text: "اليوم هو تذكار استشهاد القديسة دميانة." },
-        { date: "01-01", text: "اليوم هو تذكار استشهاد القديس مارمينا العجايبي." },
-        { date: "01-02", text: "اليوم هو تذكار نياحة البابا كيرلس السادس." },
-        // المزيد من التذكارات
-    ];
-
-    const today = new Date();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
-    const todayDate = `${month}-${day}`;
-
-    for (let remembrance of remembrances) {
-        if (remembrance.date === todayDate) {
-            return remembrance.text;
-        }
-    }
-    return null;
-}
-
-function showRemembrance() {
-    const remembrance = getTodaysRemembrance();
-    if (remembrance) {
-        showToast(remembrance);
-    } else {
-        showToast("لا يوجد تذكار لهذا اليوم.");
-    }
-}
-
 document.getElementById("new-verse").addEventListener("click", () => {
-    document.getElementById("verse").textContent = getRandomVerse();
+    const verseText = getRandomVerse();
+    const verseElement = document.getElementById("verse");
+    verseElement.textContent = "جاري تحميل الآية...";  // كتابة النص المؤقت عند الضغط
+    setTimeout(() => {
+        verseElement.textContent = verseText;  // بعد وقت معين نعرض الآية الفعلية
+    }, 1000);  // يمكنك تغيير هذا الوقت حسب رغبتك (هنا تم تحديد 1 ثانية)
 });
-
-document.getElementById("remembrance-button").addEventListener("click", showRemembrance);
