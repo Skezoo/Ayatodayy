@@ -1,169 +1,172 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آية اليوم ✝️</title>
+    <title>آية اليوم</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-        }
-
         body {
-            font-family: 'Tajawal', Arial, sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
-            padding: 20px;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
-                      url('https://raw.githubusercontent.com/Skezoo/Ayatoday/main/C4.jpg');
+            padding: 50px;
+            background-image: url('https://raw.githubusercontent.com/Skezoo/Ayatoday/main/C4.jpg'); /* تعديل الخلفية */
             background-size: cover;
             background-position: center;
-            min-height: 100vh;
-            color: #fff;
+            background-repeat: no-repeat;
+            color: white;
+            height: 100vh;
             margin: 0;
         }
 
         #title {
-            font-size: 2.2rem;
+            font-size: 32px;
+            font-weight: bold;
             color: #FFD700;
-            margin: 2rem 0;
-            padding: 1rem 2rem;
-            background: rgba(0,0,0,0.8);
-            border-radius: 15px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            margin-bottom: 30px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
             display: inline-block;
-            animation: fadeInUp 1s ease;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         #verse-container {
-            background: rgba(255,255,255,0.15);
-            padding: 2rem;
-            border-radius: 20px;
-            margin: 2rem auto;
-            max-width: 800px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            overflow: hidden;
-            flex-wrap: wrap; /* للسماح للصورة والنص بالتنظيم بشكل مرن */
-        }
-
-        #verse {
-            flex: 1;
-            font-size: 1.6rem;
-            line-height: 1.8;
-            margin: 1.5rem 0;
-            font-weight: 500;
-            min-height: 100px;
-            max-width: 60%; /* تخصيص حجم النص ليأخذ المساحة المناسبة */
-            overflow-wrap: break-word; /* منع النص من الخروج عن الحدود */
-        }
-
-        #verse img {
-            width: 100%; /* السماح للصورة أن تأخذ 100% من عرض العنصر المخصص لها */
-            max-width: 250px; /* تحديد حد أقصى للعرض */
-            height: auto;
-            border-radius: 10px;
-            object-fit: cover;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            flex-shrink: 0;
-        }
-
-        .verse-reference {
-            font-size: 1.2rem;
-            color: #FFD700;
-            margin-top: 1rem;
-            display: block;
-        }
-
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1rem;
-            margin: 2rem auto;
-            max-width: 900px;
-        }
-
-        button {
-            padding: 1rem;
-            font-size: 1.1rem;
-            border-radius: 12px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: var(--primary-color);
-            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+            margin: auto;
+            flex-wrap: wrap;
+        }
+
+        #verse {
+            font-size: 24px;
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+            flex: 1;
+            max-width: 80%;
+        }
+
+        #verse-image {
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+            max-width: 100%;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            min-width: 120px;
+            background: #333; /* تغيير الخلفية لتتناسب مع المظهر */
+            color: white;
         }
 
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: #444; /* تغيير اللون عند التمرير */
+            transform: scale(1.05); /* زيادة الحجم قليلاً عند التمرير */
         }
 
-        #new-verse { background: #27ae60; }
-        #copy-verse { background: #2980b9; }
-        #share-verse { background: #f39c12; }
-        #save-verse { background: #e74c3c; }
-        #explain-verse { background: #8e44ad; }
-        #remembrance-button { background: #16a085; }
+        #new-verse { background: #007bff; }
+        #new-verse:hover { background: #0056b3; }
+
+        #copy-verse { background: #28a745; }
+        #copy-verse:hover { background: #218838; }
+
+        #share-verse { background: #ffc107; color: black; }
+        #share-verse:hover { background: #e0a800; }
+
+        #save-verse { background: #dc3545; }
+        #save-verse:hover { background: #c82333; }
+
+        #explain-verse { background: #6610f2; }
+        #explain-verse:hover { background: #520dc2; }
+
+        #notification-button { background: #6c757d; }
+        #notification-button:hover { background: #5a6268; }
+
+        #remembrance-button { background: #17a2b8; } /* زر تذكار اليوم */
+        #remembrance-button:hover { background: #138496; }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        .footer .church-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #aaa;
+        }
 
         .toast {
             position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.9);
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 1rem;
+            padding: 10px 15px;
+            border-radius: 5px;
+            z-index: 9999;
             display: none;
-            animation: slideIn 0.4s ease-out;
-            z-index: 1000;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideIn {
-            from { bottom: -100px; }
-            to { bottom: 30px; }
-        }
-
-        @media (max-width: 768px) {
-            #title { font-size: 1.8rem; }
-            #verse { font-size: 1.3rem; }
-            button { font-size: 1rem; }
-            #verse-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            #verse {
-                max-width: 100%;
-                text-align: center;
-            }
-            #verse img {
-                width: 80%; /* تغيير حجم الصورة عند الشاشات الصغيرة */
-                max-width: 100%;
-            }
+        @media (max-width: 600px) {
+            body { padding: 20px; }
+            #title { font-size: 24px; padding: 8px; }
+            #verse-container { flex-direction: column; max-width: 100%; padding: 15px; }
+            #verse { font-size: 18px; padding: 15px; max-width: 100%; }
+            #verse-image { width: 100px; }
+            button { min-width: 100px; font-size: 14px; }
         }
     </style>
 </head>
+
 <body>
-    <h1 id="title" class="animate__animated animate__fadeIn">صوت ربنا ليك  ✝️</h1>
-    
-    <div id="verse-container" class="animate__animated animate__zoomIn">
+    <h2 id="title">صوت ربنا ليك ✝📖</h2>
+
+    <div id="verse-container">
+        <img src="https://raw.githubusercontent.com/Skezoo/Ayatoday/main/c2.jpg" id="verse-image" alt="صورة دينية">
         <div id="verse">جاري تحميل الآية...</div>
-        <img src="https://raw.githubusercontent.com/Skezoo/Ayatodayy/main/c2.jpg" alt="Image for the verse">
+        <img src="https://raw.githubusercontent.com/Skezoo/Ayatoday/main/c2.jpg" id="verse-image" alt="صورة دينية">
     </div>
 
     <div class="buttons">
@@ -172,11 +175,27 @@
         <button id="share-verse">📤 مشاركة</button>
         <button id="save-verse">❤ حفظ الآية</button>
         <button id="explain-verse">📖 عرض التفسير</button>
-        <button id="remembrance-button">📅 تذكار اليوم</button>
+        <button id="notification-button">🔔 تفعيل التنبيه اليومي</button>
+        <button id="remembrance-button">📅 تذكار اليوم</button> <!-- الزر الجديد -->
+    </div>
+
+    <div class="footer">
+        <p class="church-name">
+            <a href="https://www.facebook.com/share/19o48YDdaW/" target="_blank"
+                style="text-decoration: none; color: inherit;">
+                #إتبعني_كاتدرائية مارمينا والبابا كيرلس
+            </a>
+        </p>
+        <p>إرسالة ربنا ليك النهاردة ومع كل تحديث للصفحة رسالة مختلفة</p>
+    </div>
+
+    <div class="copyright">
+        <p>&copy; 2025 جميع الحقوق محفوظة لـ كنيسة ماري مينا. <br> تم تطوير هذا الموقع بواسطة المهندس أمير ميلاد.</p>
     </div>
 
     <div class="toast" id="toast"></div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
