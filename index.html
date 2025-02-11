@@ -48,6 +48,7 @@
             justify-content: space-between;
             align-items: center;
             overflow: hidden;
+            flex-wrap: wrap; /* للسماح للصورة والنص بالتنظيم بشكل مرن */
         }
 
         #verse {
@@ -62,9 +63,9 @@
         }
 
         #verse img {
-            width: 35%; /* تقليل حجم الصورة لتكون ملائمة */
+            width: 100%; /* السماح للصورة أن تأخذ 100% من عرض العنصر المخصص لها */
+            max-width: 250px; /* تحديد حد أقصى للعرض */
             height: auto;
-            max-height: 250px; /* تأكيد عدم تجاوز الصورة للحجم المطلوب */
             border-radius: 10px;
             object-fit: cover;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -142,6 +143,18 @@
             #title { font-size: 1.8rem; }
             #verse { font-size: 1.3rem; }
             button { font-size: 1rem; }
+            #verse-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            #verse {
+                max-width: 100%;
+                text-align: center;
+            }
+            #verse img {
+                width: 80%; /* تغيير حجم الصورة عند الشاشات الصغيرة */
+                max-width: 100%;
+            }
         }
     </style>
 </head>
