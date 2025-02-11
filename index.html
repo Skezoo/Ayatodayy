@@ -47,7 +47,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            overflow: hidden; /* لضمان عدم تجاوز الصورة */
+            overflow: hidden;
+            max-height: 400px; /* حد أقصى للارتفاع */
         }
 
         #verse {
@@ -57,15 +58,19 @@
             margin: 1.5rem 0;
             font-weight: 500;
             min-height: 100px;
+            max-width: 60%; /* تخصيص حجم الآية */
+            overflow: hidden;
+            word-wrap: break-word;
         }
 
         #verse img {
-            max-width: 35%; /* جعل الصورة بحجم مناسب */
+            width: 35%; /* تقليل الحجم أكثر */
             height: auto;
+            max-height: 100%; /* التأكد من عدم تجاوز ارتفاع الصورة */
             border-radius: 10px;
             object-fit: cover;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            flex-shrink: 0; /* منع تصغير الصورة */
+            flex-shrink: 0;
         }
 
         .verse-reference {
