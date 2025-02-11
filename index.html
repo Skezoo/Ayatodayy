@@ -47,6 +47,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            overflow: hidden; /* لضمان عدم تجاوز الصورة */
         }
 
         #verse {
@@ -59,11 +60,12 @@
         }
 
         #verse img {
-            max-width: 35%;
+            max-width: 40%; /* جعل الصورة بحجم أصغر */
             height: auto;
             border-radius: 10px;
             object-fit: cover;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0; /* منع تصغير الصورة */
         }
 
         .verse-reference {
