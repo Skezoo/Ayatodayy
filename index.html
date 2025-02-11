@@ -37,13 +37,15 @@
         }
 
         #verse-container {
-            background: rgba(255,255,255,0.15);
+            display: flex; /* ترتيب الآية والصورة بجانب بعض */
+            align-items: center; /* محاذاة العناصر بشكل عمودي */
             padding: 2rem;
             border-radius: 20px;
             margin: 2rem auto;
-            max-width: 800px;
+            max-width: 900px;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.15); /* خلفية شفافة مع تأثير ضبابي */
         }
 
         #verse {
@@ -52,6 +54,14 @@
             margin: 1.5rem 0;
             font-weight: 500;
             min-height: 100px;
+            max-width: 60%; /* الآية تأخذ 60% من العرض */
+        }
+
+        #verse img {
+            max-width: 35%; /* الصورة تأخذ 35% من العرض */
+            border-radius: 10px;
+            object-fit: cover; /* لضبط الصورة بما يتناسب مع المساحة */
+            margin-left: 2rem; /* ترك مسافة بين الآية والصورة */
         }
 
         .verse-reference {
@@ -132,7 +142,11 @@
     <h1 id="title" class="animate__animated animate__fadeIn">صوت ربنا ليك  ✝️</h1>
     
     <div id="verse-container" class="animate__animated animate__zoomIn">
-        <div id="verse">جاري تحميل الآية...</div>
+        <div id="verse">
+            <p>جاري تحميل الآية...</p>
+            <p class="verse-reference"></p>
+        </div>
+        <img src="https://raw.githubusercontent.com/Skezoo/Ayatodayy/main/c2.jpg" alt="Image" />
     </div>
 
     <div class="buttons">
