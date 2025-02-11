@@ -48,7 +48,6 @@
             justify-content: space-between;
             align-items: center;
             overflow: hidden;
-            max-height: 400px; /* حد أقصى للارتفاع */
         }
 
         #verse {
@@ -58,15 +57,14 @@
             margin: 1.5rem 0;
             font-weight: 500;
             min-height: 100px;
-            max-width: 60%; /* تخصيص حجم الآية */
-            overflow: hidden;
-            word-wrap: break-word;
+            max-width: 60%; /* تخصيص حجم النص ليأخذ المساحة المناسبة */
+            overflow-wrap: break-word; /* منع النص من الخروج عن الحدود */
         }
 
         #verse img {
-            width: 35%; /* تقليل الحجم أكثر */
+            width: 35%; /* تقليل حجم الصورة لتكون ملائمة */
             height: auto;
-            max-height: 100%; /* التأكد من عدم تجاوز ارتفاع الصورة */
+            max-height: 250px; /* تأكيد عدم تجاوز الصورة للحجم المطلوب */
             border-radius: 10px;
             object-fit: cover;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
