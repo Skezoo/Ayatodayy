@@ -36,7 +36,7 @@ const remembrances = {
 };
 
 let currentVerse = null;
-let notificationsEnabled = false;
+let usedVerses = new Set(); // لتخزين الآيات التي تم عرضها
 
 // ======== إصلاح مشكلة تحميل الآية ========
 function getRandomVerse() {
@@ -46,11 +46,14 @@ function getRandomVerse() {
     }
     
     let randomIndex;
+    let verse;
     do {
         randomIndex = Math.floor(Math.random() * verses.length);
-    } while (verses.length > 1 && verses[randomIndex] === currentVerse);
-    
-    return verses[randomIndex];
+        verse = verses[randomIndex];
+    } while (usedVerses.has(verse.reference)); // تأكد من أن الآية لم تُعرض مسبقًا
+
+    usedVerses.add(verse.reference); // إضافة الآية إلى الآيات المعروضة
+    return verse;
 }
 
 function updateVerseDisplay() {
