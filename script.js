@@ -36,7 +36,7 @@ const remembrances = {
 };
 
 let currentVerse = null;
-let usedVerses = new Set(); // لتخزين الآيات التي تم عرضها
+let usedVerses = []; // لتخزين الآيات التي تم عرضها
 
 // ======== إصلاح مشكلة تحميل الآية ========
 function getRandomVerse() {
@@ -45,14 +45,21 @@ function getRandomVerse() {
         return null;
     }
     
+    // إذا تم عرض جميع الآيات، نعيد تعيين المتغيرات لعرض الآيات من البداية
+    if (usedVerses.length === verses.length) {
+        usedVerses = [];
+    }
+
+    // اختر آية عشوائية لم تعرض من قبل
     let randomIndex;
     let verse;
     do {
         randomIndex = Math.floor(Math.random() * verses.length);
         verse = verses[randomIndex];
-    } while (usedVerses.has(verse.reference)); // تأكد من أن الآية لم تُعرض مسبقًا
+    } while (usedVerses.includes(verse.reference)); // تأكد من أن الآية لم تُعرض مسبقًا
 
-    usedVerses.add(verse.reference); // إضافة الآية إلى الآيات المعروضة
+    // إضافة الآية إلى الآيات المعروضة
+    usedVerses.push(verse.reference);
     return verse;
 }
 
