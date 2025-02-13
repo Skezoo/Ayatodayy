@@ -37,11 +37,15 @@
         }
 
         #event {
-            font-size: 26px; /* تكبير حجم النص */
+            font-size: 26px;
             font-weight: bold;
             color: #fff;
-            text-shadow: -2px -2px 4px rgba(255, 255, 255, 0.3), 2px 2px 4px rgba(0, 0, 0, 0.7); /* تأثير محفور */
+            text-shadow: -2px -2px 4px rgba(255, 255, 255, 0.3), 2px 2px 4px rgba(0, 0, 0, 0.7);
             margin-top: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            display: inline-block;
         }
 
         #theme {
@@ -77,10 +81,20 @@
             color: black;
             padding: 20px;
             border-radius: 10px;
-            opacity: 1;
-            transition: opacity 0.3s ease-in-out;
-            flex: 1;
+            text-align: center;
             max-width: 80%;
+        }
+
+        #verse .verse-text {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        #verse .verse-reference {
+            font-size: 18px;
+            color: #555;
+            margin-top: 10px;
+            font-style: italic;
         }
 
         #verse-image {
@@ -152,29 +166,31 @@
             display: none;
         }
 
-        @media (max-width: 600px) {
-            body { padding: 20px; }
-            #title { font-size: 24px; padding: 8px; }
-            #event { font-size: 22px; margin-top: 5px; }
-            #theme { font-size: 20px; margin-top: 5px; }
-            #verse-container { flex-direction: column; max-width: 100%; padding: 15px; }
-            #verse { font-size: 18px; padding: 15px; max-width: 100%; }
-            #verse-image { width: 100px; }
-            button { min-width: 100px; font-size: 14px; }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            font-size: 14px;
+            color: #333;
+            margin-top: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
     <div id="header">
-        <h2 id="title">✝📖صوت ربنا ليك </h2>
-        <p id="event">⛪لقاء شباب مدينة العاشر</p>
+        <h2 id="title">✝📖 صوت ربنا ليك</h2>
+        <p id="event">⛪ لقاء شباب مدينة العاشر - رسالة محبة لكل قلب ❤</p>
         <p id="theme">"الحب ليس هو"</p>
     </div>
 
     <div id="verse-container">
         <img src="https://raw.githubusercontent.com/Skezoo/Ayatoday/main/c2.jpg" id="verse-image" alt="صورة دينية">
-        <div id="verse">جاري تحميل الآية...</div>
+        <div id="verse">
+            <p class="verse-text">جاري تحميل الآية...</p>
+            <p class="verse-reference"></p>
+        </div>
     </div>
 
     <div class="buttons">
@@ -194,7 +210,9 @@
         </p>
     </div>
 
-    <div class="toast" id="toast"></div>
+    <footer>
+        جميع الحقوق محفوظة © 2025 | تم تطوير الموقع بواسطة <strong>المهندس أمير ميلاد</strong>
+    </footer>
 
     <script src="script.js"></script>
 </body>
