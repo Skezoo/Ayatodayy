@@ -1,3 +1,12 @@
+const priorityVerses = [
+    { text: "أَيُّهَا الأَحِبَّاءُ، إِنْ كَانَ اللهُ قَدْ أَحَبَّنَا هَكَذَا، يَنْبَغِي لَنَا أَيْضًا أَنْ يُحِبَّ بَعْضَنَا بَعْضًا", reference: "1يو 11:4" },
+    { text: "وَلَكِنْ قَبْلَ كُلِّ شَيْءٍ لِتَكُنْ مَحَبَّتُكُمْ بَعْضِكُمْ لِبَعْضٍ شَدِيدَةً، لأَنَّ الْمَحَبَّةَ تَسْتُرُ كَثْرَةً مِنَ الْخَطَايَا", reference: "1بط 8:4" },
+    { text: "لِيَكُونَ فِيهِمُ الْحُبُّ الَّذِي أَحْبَبْتَنِي بِهِ، وَأَكُونَ أَنَا فِيهِمْ", reference: "يو 26:17" },
+    { text: "أَيُّهَا الأَحِبَّاءُ، لِنُحِبَّ بَعْضَنَا بَعْضًا، لأَنَّ الْمَحَبَّةَ هِيَ مِنَ اللهِ، وَكُلُّ مَنْ يُحِبُّ فَقَدْ وُلِدَ مِنَ اللهِ وَيَعْرِفُ اللهَ. وَمَنْ لاَ يُحِبُّ لَمْ يَعْرِفِ اللهَ، لأَنَّ اللهَ مَحَبَّةٌ", reference: "1يو 8,7:4" },
+    { text: "وَالرَّجَاءُ لاَ يُخْزِي، لأَنَّ مَحَبَّةَ اللهِ قَدِ انْسَكَبَتْ فِي قُلُوبِنَا بِالرُّوحِ الْقُدُسِ الْمُعْطَى لَنَا", reference: "رو 5:5" },
+    { text: "وَنَحْنُ قَدْ عَرَفْنَا وَصَدَّقْنَا ٱلْمَحَبَّةَ ٱلَّتِي لِلهِ فِينَا. ٱللهُ مَحَبَّةٌ، وَمَنْ يَثْبُتْ فِي ٱلْمَحَبَّةِ، يَثْبُتْ فِي ٱللهِ وَٱللهُ فِيهِ", reference: "1يو 16:4" }
+];
+
 const verses = [
     {
         text: "لأني أنا عارف الأفكار التي أنا مفتكر بها عنكم يقول الرب أفكار سلام لا شر",
@@ -23,8 +32,7 @@ const verses = [
         text: "اِغْفِرُوا لِمَنْ يَظْلِمُكُمْ، كَمَا غَفَرَ لَكُمُ اللَّهُ فِي الْمَسِيحِ",
         reference: "أفسس 4:32",
         explanation: "أهمية التسامح والمحبة في المسيحية"
-    },
-    // أضف المزيد من الآيات هنا
+    }
 ];
 
 const remembrances = {
@@ -32,33 +40,31 @@ const remembrances = {
     "02-01": "نياحة البابا كيرلس السادس",
     "03-01": "استشهاد القديسة دميانة",
     "04-01": "نياحة الأنبا أنطونيوس أب الرهبان",
-    "15-10": "تذكار اختباري" // مثال لتاريخ اليوم
+    "15-10": "تذكار اختباري"
 };
 
 let currentVerse = null;
-let usedVerses = []; // لتخزين الآيات التي تم عرضها
+let usedVerses = [];
+let usedPriorityVerses = [];
 
-// ======== إصلاح مشكلة تحميل الآية ========
 function getRandomVerse() {
-    if (verses.length === 0) {
-        console.error("لا توجد آيات متاحة");
-        return null;
+    if (usedPriorityVerses.length < priorityVerses.length) {
+        const verse = priorityVerses[usedPriorityVerses.length];
+        usedPriorityVerses.push(verse);
+        return verse;
     }
-    
-    // إذا تم عرض جميع الآيات، نعيد تعيين المتغيرات لعرض الآيات من البداية
+
     if (usedVerses.length === verses.length) {
         usedVerses = [];
     }
 
-    // اختر آية عشوائية لم تعرض من قبل
     let randomIndex;
     let verse;
     do {
         randomIndex = Math.floor(Math.random() * verses.length);
         verse = verses[randomIndex];
-    } while (usedVerses.includes(verse.reference)); // تأكد من أن الآية لم تُعرض مسبقًا
+    } while (usedVerses.includes(verse.reference));
 
-    // إضافة الآية إلى الآيات المعروضة
     usedVerses.push(verse.reference);
     return verse;
 }
@@ -66,13 +72,13 @@ function getRandomVerse() {
 function updateVerseDisplay() {
     const verse = getRandomVerse();
     const verseElement = document.getElementById('verse');
-    
+
     if (!verse || !verseElement) {
         console.error("خطأ في تحميل الآية");
         verseElement.textContent = "عذرًا، حدث خطأ في تحميل الآية";
         return;
     }
-    
+
     currentVerse = verse;
     verseElement.innerHTML = `
         <p>${verse.text}</p>
@@ -82,7 +88,6 @@ function updateVerseDisplay() {
     setTimeout(() => verseElement.classList.remove('animate__fadeIn'), 500);
 }
 
-// ======== إصلاح مشكلة التذكارات ========
 function getFormattedDate() {
     const date = new Date();
     return `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}`;
@@ -91,17 +96,14 @@ function getFormattedDate() {
 function showTodaysRemembrance() {
     const today = getFormattedDate();
     const remembrance = remembrances[today] || `لا يوجد تذكار مسجل لـ ${today}`;
-    
-    console.log("تاريخ اليوم:", today); // للمساعدة في التشخيص
+
+    console.log("تاريخ اليوم:", today);
     showToast(remembrance);
 }
 
-// ======== نظام الأساسي ========
 document.addEventListener('DOMContentLoaded', () => {
-    // التحميل الأولي للآية
     updateVerseDisplay();
-    
-    // تهيئة الأزرار
+
     document.getElementById('new-verse').addEventListener('click', updateVerseDisplay);
     document.getElementById('copy-verse').addEventListener('click', () => {
         navigator.clipboard.writeText(`${currentVerse.text} - ${currentVerse.reference}`);
@@ -121,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('save-verse').addEventListener('click', () => {
         const saved = JSON.parse(localStorage.getItem('savedVerses') || '[]');
         const exists = saved.some(v => v.reference === currentVerse.reference);
-        
+
         if (!exists) {
             saved.push(currentVerse);
             localStorage.setItem('savedVerses', JSON.stringify(saved));
