@@ -20,12 +20,15 @@
             margin: 0;
         }
 
+        #header {
+            margin-bottom: 20px;
+        }
+
         #title {
             font-size: 32px;
             font-weight: bold;
             color: #FFD700;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-            margin-bottom: 10px;
             padding: 10px;
             background: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
@@ -33,17 +36,20 @@
             animation: fadeIn 2s ease-in-out;
         }
 
-        #subtitle {
+        #event {
             font-size: 20px;
             font-weight: bold;
             color: #ddd;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-            margin-bottom: 30px;
-            padding: 5px 15px;
-            display: inline-block;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.3), inset -2px -2px 5px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+        }
+
+        #theme {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+            margin-top: 5px;
         }
 
         @keyframes fadeIn {
@@ -118,9 +124,6 @@
         #explain-verse { background: #6610f2; color: white; }
         #explain-verse:hover { background: #520dc2; }
 
-        #notification-button { background: #6c757d; color: white; }
-        #notification-button:hover { background: #5a6268; }
-
         #remembrance-button { background: #17a2b8; color: white; }
         #remembrance-button:hover { background: #138496; }
 
@@ -135,12 +138,6 @@
             font-weight: bold;
             color: #FFD700;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .copyright {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #aaa;
         }
 
         .toast {
@@ -158,7 +155,8 @@
         @media (max-width: 600px) {
             body { padding: 20px; }
             #title { font-size: 24px; padding: 8px; }
-            #subtitle { font-size: 16px; padding: 5px; }
+            #event { font-size: 16px; margin-top: 5px; }
+            #theme { font-size: 20px; margin-top: 5px; }
             #verse-container { flex-direction: column; max-width: 100%; padding: 15px; }
             #verse { font-size: 18px; padding: 15px; max-width: 100%; }
             #verse-image { width: 100px; }
@@ -168,8 +166,11 @@
 </head>
 
 <body>
-    <h2 id="title">صوت ربنا ليك ✝📖</h2>
-    <p id="subtitle">لقاء شباب مدينة العاشر⛪ "الحب ليس هو"</p>
+    <div id="header">
+        <h2 id="title">صوت ربنا ليك ✝📖</h2>
+        <p id="event">لقاء شباب مدينة العاشر⛪</p>
+        <p id="theme">"الحب ليس هو"</p>
+    </div>
 
     <div id="verse-container">
         <img src="https://raw.githubusercontent.com/Skezoo/Ayatoday/main/c2.jpg" id="verse-image" alt="صورة دينية">
@@ -182,7 +183,6 @@
         <button id="share-verse">📤 مشاركة</button>
         <button id="save-verse">❤ حفظ الآية</button>
         <button id="explain-verse">📖 عرض التفسير</button>
-        <button id="notification-button">🔔 تفعيل التنبيه اليومي</button>
         <button id="remembrance-button">📅 تذكار اليوم</button>
     </div>
 
