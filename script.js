@@ -93,21 +93,87 @@ function updateVerseDisplay() {
 
     if (!verse || !verseElement) {
         console.error("خطأ في تحميل الآية");
-        verseElement.textContent = "عذرًا، حدث خطأ في تحميل الآية";
+        verseElement.textContent = "عذرًا، لا توجد آية حالياً.";
         return;
     }
 
-    currentVerse = verse;
-    verseElement.innerHTML = `
-        <p>${verse.text}</p>
-        <p class="verse-reference">${verse.reference}</p>
-    `;
-    verseElement.classList.add('animate__fadeIn');
-    setTimeout(() => verseElement.classList.remove('animate__fadeIn'), 500);
+    const verseText = document.querySelector(".verse-text");
+    const verseReference = document.querySelector(".verse-reference");
+
+    verseText.textContent = verse.text;
+    verseReference.textContent = `- ${verse.reference}`;
+
+    currentVerse = verse; // تخزين الآية الحالية لعرض التفسير أو العمليات الأخرى عليها
 }
 
+// ======== نسخ الآية ========
+function copyVerse() {
+    if (currentVerse) {
+        const textToCopy = `${currentVerse.text} ${currentVerse.reference}`;
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => showToast('تم نسخ الآية بنجاح!'))
+            .catch(err => console.error('خطأ في النسخ:', err));
+    }
+}
+
+// ======== مشاركة الآية ========
+function shareVerse() {
+    if (currentVerse) {
+        const shareText = `${currentVerse.text} ${currentVerse.reference}`;
+        if (navigator.share) {
+            navigator.share({
+                title: 'آية اليوم',
+                text: shareText,
+                url: window.location.href
+            })
+            .catch(err => console.error('خطأ في المشاركة:', err));
+        } else {
+            console.log("مشاركة غير مدعومة في هذا المتصفح.");
+        }
+    }
+}
+
+// ======== حفظ الآية ========
+function saveVerse() {
+    if (currentVerse) {
+        localStorage.setItem('savedVerse', JSON.stringify(currentVerse));
+        showToast('تم حفظ الآية!');
+    }
+}
+
+// ======== عرض التفسير ========
+function explainVerse() {
+    if (currentVerse) {
+        alert(`التفسير: ${currentVerse.explanation}`);
+    }
+}
+
+// ======== تذكار اليوم ========
+function showRemembrance() {
+    alert("تذكر أن الله معك في كل وقت!");
+}
+
+// ======== إظهار الرسائل المنبثقة ========
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.classList.add('toast');
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    toast.style.display = 'block';
+    setTimeout(() => {
+        toast.style.display = 'none';
+        document.body.removeChild(toast);
+    }, 3000);
+}
+
+// ======== إعداد الأحداث ========
+document.getElementById('new-verse').addEventListener('click', updateVerseDisplay);
+document.getElementById('copy-verse').addEventListener('click', copyVerse);
+document.getElementById('share-verse').addEventListener('click', shareVerse);
+document.getElementById('save-verse').addEventListener('click', saveVerse);
+document.getElementById('explain-verse').addEventListener('click', explainVerse);
+document.getElementById('remembrance-button').addEventListener('click', showRemembrance);
+
 // ======== تحميل أول آية ========
-document.addEventListener('DOMContentLoaded', () => {
-    updateVerseDisplay();
-    document.getElementById('new-verse').addEventListener('click', updateVerseDisplay);
-});
+window.onload = updateVerseDisplay;
