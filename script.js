@@ -1,16 +1,41 @@
 const priorityVerses = [
-    { text: "أَيُّهَا الأَحِبَّاءُ، إِنْ كَانَ اللهُ قَدْ أَحَبَّنَا هَكَذَا، يَنْبَغِي لَنَا أَيْضًا أَنْ يُحِبَّ بَعْضَنَا بَعْضًا", reference: "1يو 11:4" },
-    { text: "وَلَكِنْ قَبْلَ كُلِّ شَيْءٍ لِتَكُنْ مَحَبَّتُكُمْ بَعْضِكُمْ لِبَعْضٍ شَدِيدَةً، لأَنَّ الْمَحَبَّةَ تَسْتُرُ كَثْرَةً مِنَ الْخَطَايَا", reference: "1بط 8:4" },
-    { text: "لِيَكُونَ فِيهِمُ الْحُبُّ الَّذِي أَحْبَبْتَنِي بِهِ، وَأَكُونَ أَنَا فِيهِمْ", reference: "يو 26:17" },
-    { text: "أَيُّهَا الأَحِبَّاءُ، لِنُحِبَّ بَعْضَنَا بَعْضًا، لأَنَّ الْمَحَبَّةَ هِيَ مِنَ اللهِ، وَكُلُّ مَنْ يُحِبُّ فَقَدْ وُلِدَ مِنَ اللهِ وَيَعْرِفُ اللهَ. وَمَنْ لاَ يُحِبُّ لَمْ يَعْرِفِ اللهَ، لأَنَّ اللهَ مَحَبَّةٌ", reference: "1يو 8,7:4" },
-    { text: "وَالرَّجَاءُ لاَ يُخْزِي، لأَنَّ مَحَبَّةَ اللهِ قَدِ انْسَكَبَتْ فِي قُلُوبِنَا بِالرُّوحِ الْقُدُسِ الْمُعْطَى لَنَا", reference: "رو 5:5" },
-    { text: "وَنَحْنُ قَدْ عَرَفْنَا وَصَدَّقْنَا ٱلْمَحَبَّةَ ٱلَّتِي لِلهِ فِينَا. ٱللهُ مَحَبَّةٌ، وَمَنْ يَثْبُتْ فِي ٱلْمَحَبَّةِ، يَثْبُتْ فِي ٱللهِ وَٱللهُ فِيهِ", reference: "1يو 16:4" }
+    {
+        text: "أَيُّهَا الأَحِبَّاءُ، إِنْ كَانَ اللهُ قَدْ أَحَبَّنَا هَكَذَا، يَنْبَغِي لَنَا أَيْضًا أَنْ يُحِبَّ بَعْضُنَا بَعْضًا",
+        reference: "1يوحنا 4:11",
+        explanation: "دعوة للمحبة المتبادلة كمثال لمحبة الله لنا"
+    },
+    {
+        text: "وَلَكِنْ قَبْلَ كُلِّ شَيْءٍ لِتَكُنْ مَحَبَّتُكُمْ بَعْضِكُمْ لِبَعْضٍ شَدِيدَةً، لأَنَّ الْمَحَبَّةَ تَسْتُرُ كَثْرَةً مِنَ الْخَطَايَا",
+        reference: "1بطرس 4:8",
+        explanation: "المحبة الحقيقية تغطي العيوب وتسامح الأخطاء"
+    },
+    {
+        text: "لِيَكُونَ فِيهِمُ الْحُبُّ الَّذِي أَحْبَبْتَنِي بِهِ، وَأَكُونَ أَنَا فِيهِمْ",
+        reference: "يوحنا 17:26",
+        explanation: "طلب المسيح أن يكون حب الله سائدًا فينا"
+    },
+    {
+        text: "أَيُّهَا الأَحِبَّاءُ، لِنُحِبَّ بَعْضَنَا بَعْضًا، لأَنَّ الْمَحَبَّةَ هِيَ مِنَ اللهِ، وَكُلُّ مَنْ يُحِبُّ فَقَدْ وُلِدَ مِنَ اللهِ وَيَعْرِفُ اللهَ. وَمَنْ لاَ يُحِبُّ لَمْ يَعْرِفِ اللهَ، لأَنَّ اللهَ مَحَبَّةٌ",
+        reference: "1يوحنا 4:7-8",
+        explanation: "الله هو مصدر المحبة، ومن يحب فهو من الله"
+    },
+    {
+        text: "وَالرَّجَاءُ لاَ يُخْزِي، لأَنَّ مَحَبَّةَ اللهِ قَدِ انْسَكَبَتْ فِي قُلُوبِنَا بِالرُّوحِ الْقُدُسِ الْمُعْطَى لَنَا",
+        reference: "رومية 5:5",
+        explanation: "المحبة الإلهية مزروعة في قلوبنا بالروح القدس"
+    },
+    {
+        text: "وَنَحْنُ قَدْ عَرَفْنَا وَصَدَّقْنَا ٱلْمَحَبَّةَ ٱلَّتِي لِلهِ فِينَا. ٱللهُ مَحَبَّةٌ، وَمَنْ يَثْبُتْ فِي ٱلْمَحَبَّةِ، يَثْبُتْ فِي ٱللهِ وَٱللهُ فِيهِ",
+        reference: "1يوحنا 4:16",
+        explanation: "الثبات في المحبة يعني الثبات في الله"
+    }
 ];
 
-const verses = [
+// دمج الآيات الجديدة مع الآيات الأصلية
+const verses = [...priorityVerses,
     {
         text: "لأني أنا عارف الأفكار التي أنا مفتكر بها عنكم يقول الرب أفكار سلام لا شر",
-        reference: "إرميا 29: 11",
+        reference: "إرميا 29:11",
         explanation: "الله يعلن عن محبته ورعايته لشعبه"
     },
     {
@@ -35,29 +60,21 @@ const verses = [
     }
 ];
 
-const remembrances = {
-    "01-01": "تذكار استشهاد القديس مارمينا العجايبي",
-    "02-01": "نياحة البابا كيرلس السادس",
-    "03-01": "استشهاد القديسة دميانة",
-    "04-01": "نياحة الأنبا أنطونيوس أب الرهبان",
-    "15-10": "تذكار اختباري"
-};
-
 let currentVerse = null;
 let usedVerses = [];
-let usedPriorityVerses = [];
 
-function getRandomVerse() {
-    if (usedPriorityVerses.length < priorityVerses.length) {
-        const verse = priorityVerses[usedPriorityVerses.length];
-        usedPriorityVerses.push(verse);
+// ======== عرض الآيات بالترتيب ========
+function getOrderedVerse() {
+    if (usedVerses.length < priorityVerses.length) {
+        const verse = priorityVerses[usedVerses.length];
+        usedVerses.push(verse.reference);
         return verse;
     }
+    return getRandomVerse();
+}
 
-    if (usedVerses.length === verses.length) {
-        usedVerses = [];
-    }
-
+// ======== اختيار آية عشوائية بعد انتهاء الأولويات ========
+function getRandomVerse() {
     let randomIndex;
     let verse;
     do {
@@ -69,8 +86,9 @@ function getRandomVerse() {
     return verse;
 }
 
+// ======== تحديث الآية في الصفحة ========
 function updateVerseDisplay() {
-    const verse = getRandomVerse();
+    const verse = getOrderedVerse();
     const verseElement = document.getElementById('verse');
 
     if (!verse || !verseElement) {
@@ -88,58 +106,8 @@ function updateVerseDisplay() {
     setTimeout(() => verseElement.classList.remove('animate__fadeIn'), 500);
 }
 
-function getFormattedDate() {
-    const date = new Date();
-    return `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-}
-
-function showTodaysRemembrance() {
-    const today = getFormattedDate();
-    const remembrance = remembrances[today] || `لا يوجد تذكار مسجل لـ ${today}`;
-
-    console.log("تاريخ اليوم:", today);
-    showToast(remembrance);
-}
-
+// ======== تحميل أول آية ========
 document.addEventListener('DOMContentLoaded', () => {
     updateVerseDisplay();
-
     document.getElementById('new-verse').addEventListener('click', updateVerseDisplay);
-    document.getElementById('copy-verse').addEventListener('click', () => {
-        navigator.clipboard.writeText(`${currentVerse.text} - ${currentVerse.reference}`);
-        showToast("تم نسخ الآية");
-    });
-    document.getElementById('share-verse').addEventListener('click', async () => {
-        try {
-            await navigator.share({
-                title: `آية اليوم - ${currentVerse.reference}`,
-                text: `${currentVerse.text}\n\n${currentVerse.reference}`,
-                url: window.location.href
-            });
-        } catch (err) {
-            showToast("تم إلغاء المشاركة");
-        }
-    });
-    document.getElementById('save-verse').addEventListener('click', () => {
-        const saved = JSON.parse(localStorage.getItem('savedVerses') || '[]');
-        const exists = saved.some(v => v.reference === currentVerse.reference);
-
-        if (!exists) {
-            saved.push(currentVerse);
-            localStorage.setItem('savedVerses', JSON.stringify(saved));
-            showToast("تم حفظ الآية في المفضلة");
-        } else {
-            showToast("الآية محفوظة مسبقًا");
-        }
-    });
-    document.getElementById('remembrance-button').addEventListener('click', showTodaysRemembrance);
 });
-
-function showToast(message, duration = 3000) {
-    const toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.style.display = 'block';
-    setTimeout(() => {
-        toast.style.display = 'none';
-    }, duration);
-}
